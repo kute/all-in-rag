@@ -84,7 +84,7 @@ FAISS (Facebook AI Similarity Search) 是一个由 Facebook AI Research 开发�
 
 ```python
 from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_core.documents import Document
 
 # 1. 示例文本和嵌入模型

@@ -1,6 +1,6 @@
 import os
 # hugging face镜像设置，如果国内环境无法使用启用该设置
-# os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 from dotenv import load_dotenv
 from langchain_community.document_loaders import UnstructuredMarkdownLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -12,6 +12,15 @@ from langchain_deepseek import ChatDeepSeek
 load_dotenv()
 
 markdown_path = "../../data/C1/markdown/easy-rl-chapter1.md"
+
+# import nltk
+#
+# # 在 loader.load() 之前添加
+# try:
+#     nltk.data.find('tokenizers/punkt')
+# except LookupError:
+#     nltk.download('punkt')
+#     nltk.download('averaged_perceptron_tagger')
 
 # 加载本地markdown文件
 loader = UnstructuredMarkdownLoader(markdown_path)
@@ -27,7 +36,7 @@ embeddings = HuggingFaceEmbeddings(
     model_kwargs={'device': 'cpu'},
     encode_kwargs={'normalize_embeddings': True}
 )
-  
+
 # 构建向量存储
 vectorstore = InMemoryVectorStore(embeddings)
 vectorstore.add_documents(chunks)
@@ -50,7 +59,7 @@ llm = ChatDeepSeek(
     model="deepseek-chat",
     temperature=0.7,
     max_tokens=4096,
-    api_key=os.getenv("DEEPSEEK_API_KEY")
+    api_key='sk-be85b1c12be541d6b38fd9ae65ac9628'
 )
 
 # 用户查询

@@ -75,7 +75,7 @@ metadata_field_info = [
 llm = ChatDeepSeek(
     model="deepseek-chat", 
     temperature=0, 
-    api_key=os.getenv("DEEPSEEK_API_KEY")
+    api_key="sk-be85b1c12be541d6b38fd9ae65ac9628"
     )
 
 retriever = SelfQueryRetriever.from_llm(

@@ -11,7 +11,7 @@ class SimpleSQLGenerator:
         self.llm = ChatDeepSeek(
             model="deepseek-chat",
             temperature=0,
-            api_key=api_key or os.getenv("DEEPSEEK_API_KEY")
+            api_key=api_key or "sk-be85b1c12be541d6b38fd9ae65ac9628"
         )
     
     def generate_sql(self, user_query: str, knowledge_results: List[Dict[str, Any]]) -> str:

@@ -1,5 +1,10 @@
+import os
+# hugging face镜像设置，如果国内环境无法使用启用该设置
+os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
+
 from langchain_experimental.text_splitter import SemanticChunker
-from langchain_community.embeddings import HuggingFaceEmbeddings
+# from langchain_huggingface import HuggingFaceEmbeddings # 旧版导入路径，已弃用
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.document_loaders import TextLoader
 
 embeddings = HuggingFaceEmbeddings(
@@ -11,7 +16,8 @@ embeddings = HuggingFaceEmbeddings(
 # 初始化 SemanticChunker
 text_splitter = SemanticChunker(
     embeddings,
-    breakpoint_threshold_type="percentile" # 也可以是 "standard_deviation", "interquartile", "gradient"
+    breakpoint_threshold_type="percentile", # 也可以是 "standard_deviation", "interquartile", "gradient"
+    breakpoint_threshold_amount=95, # 百分位数阈值设为95
 )
 
 loader = TextLoader("../../data/C2/txt/蜂医.txt", encoding="utf-8")

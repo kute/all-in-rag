@@ -23,7 +23,7 @@ print(f"已定义 {len(route_names)} 个路由: {', '.join(route_names)}")
 llm = ChatDeepSeek(
     model="deepseek-chat", 
     temperature=0, 
-    api_key=os.getenv("DEEPSEEK_API_KEY")
+    api_key="sk-be85b1c12be541d6b38fd9ae65ac9628"
     )
 
 # 定义川菜和粤菜处理链

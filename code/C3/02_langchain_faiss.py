@@ -1,5 +1,6 @@
 from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import HuggingFaceEmbeddings
+# from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_core.documents import Document
 
 # 1. 示例文本和嵌入模型
@@ -29,9 +30,9 @@ loaded_vectorstore = FAISS.load_local(
 
 # 执行相似性搜索
 query = "FAISS是做什么的？"
-results = loaded_vectorstore.similarity_search(query, k=1)
+results = loaded_vectorstore.similarity_search(query, k=2)
 
 print(f"\n查询: '{query}'")
 print("相似度最高的文档:")
 for doc in results:
-    print(f"- {doc.page_content}")
+    print(f"- {doc.page_content} - {doc.metadata}")

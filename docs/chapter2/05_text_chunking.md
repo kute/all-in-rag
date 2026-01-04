@@ -211,13 +211,15 @@ splitter = RecursiveCharacterTextSplitter.from_language(
     -   **逻辑**: 这是一种更复杂的方法。它首先计算差异值的变化率（梯度），然后对梯度应用百分位法。对于那些句子间语义联系紧密、差异值普遍较低的文本（如法律、医疗文档）特别有效，因为这种方法能更好地捕捉到语义变化的“拐点”。
     -   **参数**: `breakpoint_threshold_amount` (默认为 `95`)。
 
+![img.png](img.png)
+
 **具体示例如下**
 
 ```python
 import os
 ## os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
 from langchain_experimental.text_splitter import SemanticChunker
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.document_loaders import TextLoader
 
 embeddings = HuggingFaceEmbeddings(
