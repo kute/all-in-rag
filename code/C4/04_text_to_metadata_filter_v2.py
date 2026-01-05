@@ -74,7 +74,7 @@ metadata_field_info = [
 # 4. 初始化LLM客户端
 client = OpenAI(
     base_url="https://api.deepseek.com",
-    api_key="sk-be85b1c12be541d6b38fd9ae65ac9628"
+    api_key="sk-xxxxxxxx"
 )
 
 # 5. 获取所有文档用于排序

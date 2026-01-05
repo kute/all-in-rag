@@ -59,7 +59,7 @@ llm = ChatDeepSeek(
     model="deepseek-chat",
     temperature=0.7,
     max_tokens=4096,
-    api_key='sk-be85b1c12be541d6b38fd9ae65ac9628'
+    api_key='sk-xxxxxxxx'
 )
 
 # 用户查询

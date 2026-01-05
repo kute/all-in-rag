@@ -5,7 +5,6 @@
 # import os
 # # hugging face镜像设置，如果国内环境无法使用启用该设置
 # os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
-# os.environ['HF_TOKEN'] = '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'
 import json
 import os
 import numpy as np

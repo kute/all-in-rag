@@ -13,7 +13,7 @@ from llama_index.core.evaluation import (
 from llama_index.core.evaluation.eval_utils import get_results_df
 from llama_index.core.evaluation import DatasetGenerator, QueryResponseDataset
 
-Settings.llm = DeepSeek(model="deepseek-chat", temperature=0.1, api_key="sk-be85b1c12be541d6b38fd9ae65ac9628")
+Settings.llm = DeepSeek(model="deepseek-chat", temperature=0.1, api_key="sk-xxxxxxxx")
 Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en")
 
 async def main():

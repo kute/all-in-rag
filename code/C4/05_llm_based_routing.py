@@ -7,7 +7,7 @@ from langchain_core.runnables import RunnableBranch
 llm = ChatDeepSeek(
     model="deepseek-chat", 
     temperature=0, 
-    api_key="sk-be85b1c12be541d6b38fd9ae65ac9628"
+    api_key="sk-xxxxxxxx"
     )
 
 # 1. 设置不同菜系的处理链

@@ -137,7 +137,7 @@ hf_bge_embeddings = HuggingFaceBgeEmbeddings(
 llm = ChatDeepSeek(
     model="deepseek-chat", 
     temperature=0.1, 
-    api_key="sk-be85b1c12be541d6b38fd9ae65ac9628"
+    api_key="sk-xxxxxxxx"
 )
 
 # 1. 加载和处理文档
