@@ -14,7 +14,7 @@ from llama_index.core import Settings
 load_dotenv()
 
 # llama 配置模型
-Settings.llm = ZhipuAI(model="glm-4-air", api_key="f93957363d5942318ff78e037039e129.s5OSWVvZZqLLnaIN")
+Settings.llm = ZhipuAI(model="glm-4-air", api_key="xxx")
 # Settings.llm = DeepSeek(model="deepseek-chat", api_key="sk-xxxxxxxx")
 Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-zh-v1.5")
 
