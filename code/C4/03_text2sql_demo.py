@@ -13,7 +13,7 @@ def setup_demo():
     print("=== Text2SQL框架演示 ===\n")
     
     # 检查API密钥
-    api_key = "sk-be85b1c12be541d6b38fd9ae65ac9628"
+    api_key = "sk-xxxx"
     if not api_key:
         print("先设置DEEPSEEK_API_KEY环境变量")
         return None

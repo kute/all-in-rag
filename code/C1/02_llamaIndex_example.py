@@ -7,7 +7,7 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
 load_dotenv()
 
-Settings.llm = DeepSeek(model="deepseek-chat", api_key="sk-be85b1c12be541d6b38fd9ae65ac9628")
+Settings.llm = DeepSeek(model="deepseek-chat", api_key="sk-xxxx")
 Settings.embed_model = HuggingFaceEmbedding("BAAI/bge-small-zh-v1.5")
 
 docs = SimpleDirectoryReader(input_files=["../../data/C1/markdown/easy-rl-chapter1.md"]).load_data()

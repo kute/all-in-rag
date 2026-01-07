@@ -8,7 +8,7 @@ from langchain_deepseek import ChatDeepSeek
 # 初始化 LLM
 llm = ChatDeepSeek(
     model="deepseek-chat",
-    api_key="sk-be85b1c12be541d6b38fd9ae65ac9628"
+    api_key="sk-xxxx"
 )
 
 # 1. 定义数据结构

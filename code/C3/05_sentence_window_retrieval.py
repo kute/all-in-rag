@@ -6,7 +6,7 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core.postprocessor import MetadataReplacementPostProcessor
 
 # 1. 配置模型
-Settings.llm = DeepSeek(model="deepseek-chat", temperature=0.1, api_key="sk-be85b1c12be541d6b38fd9ae65ac9628")
+Settings.llm = DeepSeek(model="deepseek-chat", temperature=0.1, api_key="sk-xxxx")
 Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en")
 
 # 2. 加载文档
