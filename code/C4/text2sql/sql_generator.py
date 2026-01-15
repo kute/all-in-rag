@@ -11,7 +11,11 @@ class SimpleSQLGenerator:
         self.llm = ChatDeepSeek(
             model="deepseek-chat",
             temperature=0,
+<<<<<<< Updated upstream
             api_key=api_key or "sk-xxxxxxxx"
+=======
+            api_key=api_key or "sk-xxx"
+>>>>>>> Stashed changes
         )
     
     def generate_sql(self, user_query: str, knowledge_results: List[Dict[str, Any]]) -> str:

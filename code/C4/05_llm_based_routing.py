@@ -28,7 +28,7 @@ general_prompt = ChatPromptTemplate.from_template(
 general_chain = general_prompt | llm | StrOutputParser()
 
 
-# 2. 创建路由链
+# 2. 创建路由链：意图识别
 classifier_prompt = ChatPromptTemplate.from_template(
     """根据用户问题中提到的菜品，将其分类为：['川菜', '粤菜', 或 '其他']。
     不要解释你的理由，只返回一个单词的分类结果。

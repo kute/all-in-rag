@@ -23,8 +23,8 @@ parser = PydanticOutputParser(pydantic_object=PersonInfo)
 # 3. 创建提示模板
 prompt = PromptTemplate(
     template="请根据以下文本提取信息。\n{format_instructions}\n{text}\n",
-    input_variables=["text"],
-    partial_variables={"format_instructions": parser.get_format_instructions()},
+    input_variables=["text"], # 运行时传入的动态变量
+    partial_variables={"format_instructions": parser.get_format_instructions()}, # 预填充变量，在创建模板时就需要填充变量的值
 )
 
 # # 打印格式指令

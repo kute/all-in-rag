@@ -13,7 +13,11 @@ def setup_demo():
     print("=== Text2SQL框架演示 ===\n")
     
     # 检查API密钥
+<<<<<<< Updated upstream
     api_key = "sk-xxxxxxxx"
+=======
+    api_key = "sk-xx"
+>>>>>>> Stashed changes
     if not api_key:
         print("先设置DEEPSEEK_API_KEY环境变量")
         return None
@@ -218,3 +222,15 @@ def main():
 
 if __name__ == "__main__":
     main() 
+
+# 基本运行流程
+# 1. agent职责
+#    1.1、调用知识组件
+#         1.1.1、连接 millvus，创建 client
+#         1.1.2、读取离线数据（建表语句、初始化数据等）
+#         1.1.3、使用 BGEM3将离线数据 embedding 成向量，与原始内容一并插入到向量数据库中（新增一个 dense 的字段存向量数据）
+#         1.1.4、用户提问时，将用户问题也通过 BGEM3 生成向量，然后在向量数据库中查询最相似的数据，返回给用户
+#         1.1.5、然后将搜索到的回答，提交给 sql 生成组件
+#    1.2、调用 sql 生成组件
+#         1.2.1、通过传入的上下文(包含表结构、字段描述、查询示例等)，以及 用户问题 组织成一个 prompt， 然后调用 LLM 来生成最后的 sql
+#         1.2.2、生产 sql 后，agent 会去执行，如果执行有语法等错误，会重新构造一个 修复sql错误的 prompt，然后调用 LLM 去修复，如此重复

@@ -154,7 +154,7 @@ class SimpleKnowledgeBase:
     def search(self, query: str, top_k: int = 5) -> List[Dict[str, Any]]:
         """搜索相关内容"""
         self.client.load_collection(collection_name=self.collection_name)
-            
+        
         query_embeddings = self.embedding_function([query])
         
         search_results = self.client.search(

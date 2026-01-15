@@ -180,7 +180,7 @@ class GraphDataPreparationModule:
         """
         构建菜谱文档，集成相关的食材和步骤信息
         
-        Returns:
+Returns:
             结构化的菜谱文档列表
         """
         logger.info("正在构建菜谱文档...")

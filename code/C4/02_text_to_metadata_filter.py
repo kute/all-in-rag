@@ -75,7 +75,11 @@ metadata_field_info = [
 llm = ChatDeepSeek(
     model="deepseek-chat", 
     temperature=0, 
+<<<<<<< Updated upstream
     api_key="sk-xxxxxxxx"
+=======
+    api_key="sk-xxxxxxxxxxxxxx"
+>>>>>>> Stashed changes
     )
 
 retriever = SelfQueryRetriever.from_llm(

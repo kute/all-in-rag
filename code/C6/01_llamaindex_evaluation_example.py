@@ -13,45 +13,54 @@ from llama_index.core.evaluation import (
 from llama_index.core.evaluation.eval_utils import get_results_df
 from llama_index.core.evaluation import DatasetGenerator, QueryResponseDataset
 
-Settings.llm = DeepSeek(model="deepseek-chat", temperature=0.1, api_key="sk-xxxxxxxx")
+from llama_index.llms.zhipuai import ZhipuAI
+
+# Settings.llm = DeepSeek(model="deepseek-chat", temperature=0.1, api_key="sk-xxxxxxxx")
+Settings.llm = ZhipuAI(model="glm-4-air", api_key="xxx")
 Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en")
 
 async def main():
     # 1. 加载文档
-    reader = SimpleDirectoryReader(input_files=["../../data/C3/pdf/IPCC_AR6_WGII_Chapter03.pdf"])
+    reader = SimpleDirectoryReader(input_files=[os.path.join(os.path.dirname(__file__), "../../data/C3/pdf/IPCC_AR6_WGII_Chapter03.pdf")])
     documents = reader.load_data()
 
     # 1.1 加载或生成响应评估数据集
-    if os.path.exists("./c6_response_eval_dataset.json"):
+    response_eval_dataset_path = os.path.join(os.path.dirname(__file__), "c6_response_eval_dataset.json")
+    if os.path.exists(response_eval_dataset_path):
         print("加载响应评估数据集...")
-        response_eval_dataset = QueryResponseDataset.from_json("./c6_response_eval_dataset.json")
+        # QueryResponseDataset 已废弃，改用 LabelledRagDataset
+        response_eval_dataset = QueryResponseDataset.from_json(response_eval_dataset_path)
     else:
         print("生成响应评估数据集...")
         dataset_generator = DatasetGenerator.from_documents(documents[:10])  # 减少文档数量
         response_eval_dataset = await dataset_generator.agenerate_dataset_from_nodes(num=15)  # 减少问题数量
-        response_eval_dataset.save_json("./c6_response_eval_dataset.json")
-
+        response_eval_dataset.save_json(response_eval_dataset_path)
 
 
     # 2. 构建两种不同的RAG查询引擎和检索器进行对比
     # 2.1 句子窗口检索
+    print("初始化句子窗口检索...")
     sentence_parser = SentenceWindowNodeParser.from_defaults(
         window_size=3,
         window_metadata_key="window",
         original_text_metadata_key="original_text",
     )
+    print("解析文档节点...")
     sentence_nodes = sentence_parser.get_nodes_from_documents(documents)
+    print("构建索引...")
     sentence_index = VectorStoreIndex(sentence_nodes)
-
-    sentence_query_engine = sentence_index.as_query_engine(
+    print("构建查询引擎")
+    sentence_query_engine = sentence_index.as_query_engine( # 查询引擎，检索+生成回答
         similarity_top_k=2,
         node_postprocessors=[
             MetadataReplacementPostProcessor(target_metadata_key="window")
         ],
     )
-    sentence_retriever = sentence_index.as_retriever(similarity_top_k=2)
+    print("构建检索器")
+    sentence_retriever = sentence_index.as_retriever(similarity_top_k=2) # 检索器，只检索相关文档节点
 
     # 2.2 常规分块检索（基准）
+    print("初始化常规分块检索...")
     base_parser = SentenceSplitter(chunk_size=512)
     base_nodes = base_parser.get_nodes_from_documents(documents)
     base_index = VectorStoreIndex(base_nodes)
@@ -60,8 +69,9 @@ async def main():
     base_retriever = base_index.as_retriever(similarity_top_k=2)
 
     # 3. 初始化响应评估器
-    faithfulness_evaluator = FaithfulnessEvaluator(llm=Settings.llm)
-    relevancy_evaluator = RelevancyEvaluator(llm=Settings.llm)
+    print("初始化响应评估器...")
+    faithfulness_evaluator = FaithfulnessEvaluator(llm=Settings.llm) # 忠实度评估器
+    relevancy_evaluator = RelevancyEvaluator(llm=Settings.llm) # 相关性评估器
 
     # 4. 执行响应评估对比
     print("开始执行响应评估对比...")
@@ -71,7 +81,7 @@ async def main():
     # 句子窗口检索响应评估
     print("\n=== 评估句子窗口检索 ===")
     sentence_runner = BatchEvalRunner(evaluators, workers=2, show_progress=True)
-    sentence_response_results = await sentence_runner.aevaluate_queries(
+    sentence_response_results = await sentence_runner.aevaluate_queries( # 异步执行评估
         queries=queries, query_engine=sentence_query_engine
     )
 

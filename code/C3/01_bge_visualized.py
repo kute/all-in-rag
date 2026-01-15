@@ -10,10 +10,10 @@ model.eval()
 with torch.no_grad():
     logo_text = "blue whale"
     text_emb = model.encode(text=logo_text)
-    img_emb_1 = model.encode(image="../../data/C3/imgs/datawhale01.png")
-    multi_emb_1 = model.encode(image="../../data/C3/imgs/datawhale01.png", text=logo_text)
-    img_emb_2 = model.encode(image="../../data/C3/imgs/datawhale02.png")
-    multi_emb_2 = model.encode(image="../../data/C3/imgs/datawhale02.png", text=logo_text)
+    img_emb_1 = model.encode(image=os.path.join(os.path.dirname(__file__), "../../data/C3/imgs/datawhale01.png"))
+    multi_emb_1 = model.encode(image=os.path.join(os.path.dirname(__file__), "../../data/C3/imgs/datawhale01.png"), text=logo_text)
+    img_emb_2 = model.encode(image=os.path.join(os.path.dirname(__file__), "../../data/C3/imgs/datawhale02.png"))
+    multi_emb_2 = model.encode(image=os.path.join(os.path.dirname(__file__), "../../data/C3/imgs/datawhale02.png"), text=logo_text)
 
 # 计算相似度，@表示矩阵乘法（点积），.T表示转置（行列向量互换）
 sim_1 = img_emb_1 @ img_emb_2.T

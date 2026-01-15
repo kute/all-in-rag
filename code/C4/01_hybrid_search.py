@@ -32,7 +32,7 @@ print("--> 正在初始化 BGE-M3 嵌入模型...")
 # 手动下载模型： hf download BAAI/bge-m3
 ef = BGEM3EmbeddingFunction(
     # 使用本地已经下载好的模型
-    model_name="/Users/kute/.cache/huggingface/hub/models--BAAI--bge-m3/snapshots/5617a9f61b028005a4858fdac845db406aefb181",
+    #model_name="/Users/kute/.cache/huggingface/hub/models--BAAI--bge-m3/snapshots/5617a9f61b028005a4858fdac845db406aefb181",
     use_fp16=False,
     device="cpu",
     model_kwargs={
